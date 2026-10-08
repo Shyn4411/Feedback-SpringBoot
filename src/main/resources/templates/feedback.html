@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh Giá Dịch Vụ & Sản Phẩm</title>
+    <link rel="stylesheet" th:href="@{/css/feedback.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="feedback-card">
+    <div class="header">
+        <h2>Đánh Giá Sản Phẩm / Dịch Vụ</h2>
+    </div>
+
+    <!-- Thông báo ưu đãi -->
+    <div class="bonus-banner">
+        <i class="fa-solid fa-coins coin-icon"></i>
+        <span>Xem Hướng dẫn đánh giá chuẩn để nhận đến <strong>200 xu</strong>!</span>
+        <i class="fa-solid fa-chevron-down arrow-icon"></i>
+    </div>
+
+    <!-- Thông tin dịch vụ/sản phẩm -->
+    <div class="item-summary">
+        <div class="item-image-placeholder">
+            <i class="fa-solid fa-box fa-2x"></i>
+        </div>
+        <div class="item-details">
+            <p class="title">Đơn hàng dịch vụ #SV-2026-9901</p>
+            <p class="category">Phân loại: Gói tiêu chuẩn</p>
+        </div>
+    </div>
+
+    <form th:action="@{/feedback}" th:object="${feedback}" method="post">
+
+        <!-- Đánh giá mức độ hài lòng chung -->
+        <div class="rating-row">
+            <span class="rating-label">Chất lượng dịch vụ</span>
+            <div class="star-rating">
+                <input type="radio" id="star5" th:field="*{productRating}" value="5" onclick="changeRatingText('Tuyệt vời')" checked />
+                <label for="star5" title="Tuyệt vời"><i class="fa-solid fa-star"></i></label>
+
+                <input type="radio" id="star4" th:field="*{productRating}" value="4" onclick="changeRatingText('Hài lòng')" />
+                <label for="star4" title="Hài lòng"><i class="fa-solid fa-star"></i></label>
+
+                <input type="radio" id="star3" th:field="*{productRating}" value="3" onclick="changeRatingText('Bình thường')" />
+                <label for="star3" title="Bình thường"><i class="fa-solid fa-star"></i></label>
+
+                <input type="radio" id="star2" th:field="*{productRating}" value="2" onclick="changeRatingText('Kém')" />
+                <label for="star2" title="Kém"><i class="fa-solid fa-star"></i></label>
+
+                <input type="radio" id="star1" th:field="*{productRating}" value="1" onclick="changeRatingText('Rất tệ')" />
+                <label for="star1" title="Rất tệ"><i class="fa-solid fa-star"></i></label>
+            </div>
+            <!-- Nhớ kiểm tra có đúng id="rating-text" -->
+            <span id="rating-text" class="rating-text">Tuyệt vời</span>
+        </div>
+
+        <!-- Khung nhập nội dung đánh giá -->
+        <div class="comment-box">
+            <textarea th:field="*{comment}" rows="5" placeholder="Hãy chia sẻ những điều bạn thích về dịch vụ này với những khách hàng khác nhé."></textarea>
+
+            <div class="upload-buttons">
+                <button type="button" class="btn-media"><i class="fa-solid fa-camera"></i> Thêm Hình ảnh</button>
+                <button type="button" class="btn-media"><i class="fa-solid fa-video"></i> Thêm Video</button>
+            </div>
+            <div class="reward-hint">Thêm 50 ký tự và 1 hình ảnh để nhận <span class="highlight">200 xu</span></div>
+        </div>
+
+        <!-- Checkbox hiển thị tên người dùng -->
+        <div class="checkbox-row">
+            <input type="checkbox" id="showUsername" th:field="*{showUsername}">
+            <label for="showUsername">
+                <strong>Hiển thị tên đăng nhập trên đánh giá này</strong>
+                <span class="subtext">Tên tài khoản sẽ được hiển thị công khai</span>
+            </label>
+        </div>
+
+        <!-- Tiêu chí chi tiết -->
+        <div class="service-section">
+            <div class="section-title">Về Dịch vụ</div>
+
+            <div class="service-rating-row">
+                <span>Dịch vụ của tư vấn viên</span>
+                <div class="star-rating mini">
+                    <input type="radio" id="s5" th:field="*{sellerRating}" value="5" checked /><label for="s5"><i class="fa-solid fa-star"></i></label>
+                    <input type="radio" id="s4" th:field="*{sellerRating}" value="4" /><label for="s4"><i class="fa-solid fa-star"></i></label>
+                    <input type="radio" id="s3" th:field="*{sellerRating}" value="3" /><label for="s3"><i class="fa-solid fa-star"></i></label>
+                    <input type="radio" id="s2" th:field="*{sellerRating}" value="2" /><label for="s2"><i class="fa-solid fa-star"></i></label>
+                    <input type="radio" id="s1" th:field="*{sellerRating}" value="1" /><label for="s1"><i class="fa-solid fa-star"></i></label>
+                </div>
+            </div>
+
+            <div class="service-rating-row">
+                <span>Dịch vụ vận chuyển / thực hiện</span>
+                <div class="star-rating mini">
+                    <input type="radio" id="d5" th:field="*{deliveryRating}" value="5" checked /><label for="d5"><i class="fa-solid fa-star"></i></label>
+                    <input type="radio" id="d4" th:field="*{deliveryRating}" value="4" /><label for="d4"><i class="fa-solid fa-star"></i></label>
+                    <input type="radio" id="d3" th:field="*{deliveryRating}" value="3" /><label for="d3"><i class="fa-solid fa-star"></i></label>
+                    <input type="radio" id="d2" th:field="*{deliveryRating}" value="2" /><label for="d2"><i class="fa-solid fa-star"></i></label>
+                    <input type="radio" id="d1" th:field="*{deliveryRating}" value="1" /><label for="d1"><i class="fa-solid fa-star"></i></label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Các nút bấm điều hướng -->
+        <div class="action-buttons">
+            <button type="button" class="btn-back">TRỞ LẠI</button>
+            <button type="submit" class="btn-submit">HOÀN THÀNH</button>
+        </div>
+
+    </form>
+</div>
+<script>
+    function changeRatingText(text) {
+        var textDisplay = document.getElementById('rating-text');
+        if (textDisplay) {
+            textDisplay.innerText = text;
+        }
+    }
+</script>
+</body>
+</html>

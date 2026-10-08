@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gửi Đánh Giá Thành Công</title>
+    <link rel="stylesheet" th:href="@{/css/feedback.css}">
+</head>
+<body>
+<div class="feedback-card" style="text-align: center;">
+    <h2 style="color: #4CAF50; margin-bottom: 12px;">Cảm ơn bạn đã phản hồi!</h2>
+    <p>Số sao đánh giá chung: <strong th:text="${feedback.productRating} + ' sao'"></strong></p>
+    <p>Nội dung nhận xét: <span th:text="${feedback.comment} ?: 'Không có nhận xét'">Không có nhận xét</span></p>
+    <br>
+    <a th:href="@{/feedback}" class="btn-submit" style="display: inline-block; text-decoration: none;">Quay lại</a>
+</div>
+</body>
+</html>
